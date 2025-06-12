@@ -1,9 +1,9 @@
- provider "aws" {
+provider "aws" {
   region = var.aws_region
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket = var.bucket_name
+  bucket        = var.bucket_name
   force_destroy = true
 
   versioning {
@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "tf_state" {
   }
 
   tags = {
-    Name = "Terraform State Bucket"
+    Name        = "Terraform State Bucket"
     Environment = "dev"
   }
 }
