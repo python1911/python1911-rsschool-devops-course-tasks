@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 
-# 1. OIDC Provider for GitHub Actions
+
 resource "aws_iam_openid_connect_provider" "github" {
   url = "https://token.actions.githubusercontent.com"
 
@@ -9,7 +9,7 @@ resource "aws_iam_openid_connect_provider" "github" {
   thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
 
-# 2. IAM Role for GitHub Actions
+
 resource "aws_iam_role" "github_actions_role" {
   name = "GithubActionsRole"
 
@@ -25,9 +25,14 @@ resource "aws_iam_role" "github_actions_role" {
         Condition = {
           StringLike = {
             "token.actions.githubusercontent.com:sub" = "repo:python1911/rsschool-devops-course-tasks:*"
+          },
+          StringEquals = {
+            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
         }
       }
     ]
   })
 }
+
+
