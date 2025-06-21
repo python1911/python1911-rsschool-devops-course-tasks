@@ -4,3 +4,5 @@
 *.tfplan
 *.log
 *.exe
+*.pem
+terraform.tfvars
