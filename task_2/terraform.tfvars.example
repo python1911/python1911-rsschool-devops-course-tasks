@@ -1,0 +1,4 @@
+region   = "us-east-1"
+key_name = "your-key-name"
+ami_id   = "ami-xxxxxxxx"
+my_ip    = "YOUR.PUBLIC.IP.ADDRESS/32"
