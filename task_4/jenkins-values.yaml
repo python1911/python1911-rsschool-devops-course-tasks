@@ -1,0 +1,26 @@
+controller:
+  adminUser: user
+  adminPassword: 97Qb6JkzM7
+
+  installPlugins:
+    - job-dsl
+    - configuration-as-code
+    - workflow-job
+    - credentials
+
+  JCasC:
+    enabled: true
+    configScripts:
+      jenkins-casc: |
+        jenkins:
+          systemMessage: "Jenkins configured via JCasC"
+        jobs:
+          - script: >
+              job('hello-world') {
+                description('Hello World job via JCasC + Job DSL')
+                steps {
+                  shell('echo Hello world')
+                }
+              }
+service:
+  type: NodePort
