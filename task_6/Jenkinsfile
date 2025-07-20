@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout') {
       steps {
-        // Corrected URL scheme
+       
         git branch: 'task_6', url: 'https://github.com/python1911/python1911-rsschool-devops-course-tasks.git'
       }
     }
@@ -77,12 +77,12 @@ pipeline {
   post {
     success {
       mail to: 'your@email.com',
-           subject: "✅ Jenkins Job Success: ${env.JOB_NAME}",
+           subject: " Jenkins Job Success: ${env.JOB_NAME}",
            body: "Jenkins job ${env.JOB_NAME} ran successfully."
     }
     failure {
       mail to: 'your@email.com',
-           subject: "❌ Jenkins Job Failed: ${env.JOB_NAME}",
+           subject: " Jenkins Job Failed: ${env.JOB_NAME}",
            body: "Jenkins job ${env.JOB_NAME} failed. Please check the console output."
     }
   }
