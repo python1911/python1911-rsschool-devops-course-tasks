@@ -1,0 +1,50 @@
+adminUser: admin
+adminPassword: eppuUrZSmf
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server.default.svc.cluster.local
+        access: proxy
+        isDefault: true
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    node-cpu:
+      json: |
+        {
+          "id": null,
+          "title": "Node CPU",
+          "tags": [],
+          "timezone": "browser",
+          "schemaVersion": 16,
+          "version": 1,
+          "panels": [
+            {
+              "type": "graph",
+              "title": "CPU Usage",
+              "targets": [
+                {
+                  "expr": "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)",
+                  "legendFormat": "{{instance}}"
+                }
+              ]
+            }
+          ]
+        }
